@@ -1,0 +1,1 @@
+export const GR_SER_URL = "https://goodreads-vivriti.herokuapp.com/";

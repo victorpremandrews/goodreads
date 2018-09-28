@@ -1,0 +1,7 @@
+export const SEARCH_BOOKS = "SEARCH_BOOKS";
+export const RECEIVE_BOOKS = "RECEIVE_BOOKS";
+export const SELECT_QUERY = "SELECT_QUERY";
+export const INVALIDATE_QUERY = "INVALIDATE_QUERY";
+export const SELECT_PAGE = "SELECT_PAGE";
+export const PAGINATE = "PAGINATE";
+export const RESET_PAGINATE = "RESET_PAGINATE";
