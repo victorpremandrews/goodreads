@@ -56,7 +56,6 @@ export const fetchBooks = (query, page = 1) => (dispatch, getState) => {
 
     const { booksByQuery } = getState();
     const books = booksByQuery[query] ? booksByQuery[query][page] : null;
-    console.log(books, page);
 
     if(!books) {
         dispatch(searchBooks(query, page));
