@@ -39,14 +39,14 @@ export const selectPage = page => ({
     page
 });
 
-const paginate = (items, page = 1, size = 20) => ({
+const paginate = (items, page, size = 20) => ({
     type: PAGINATE,
     page,
     size,
     items
 });
 
-const resetPaginate = () => ({
+export const resetPaginate = () => ({
     type: RESET_PAGINATE
 })
 
@@ -56,21 +56,22 @@ export const fetchBooks = (query, page = 1) => (dispatch, getState) => {
 
     const { booksByQuery } = getState();
     const books = booksByQuery[query] ? booksByQuery[query][page] : null;
+    console.log(books, page);
 
-    
     if(!books) {
-        dispatch(resetPaginate());
         dispatch(searchBooks(query, page));
         return fetch(`${GR_SER_URL}${endPoint}${payload}`)
             .then(res => res.json())
             .then(json => {
                 if(json.results && json.results.work) {
-                    dispatch(receiveBooks(query, json.results.work, page, Number(json['total-results'])));
-                    dispatch(paginate(Number(json['total-results'])));
+                    let books = json.results.work;
+                    if(!Array.isArray(books)) books = [books];
+                    dispatch(receiveBooks(query, books, page, Number(json['total-results'])));
+                    dispatch(paginate(Number(json['total-results']), page));
                 }
             }
         );
     } else {
-        dispatch(paginate(books.totalItems));
+        dispatch(paginate(books.totalItems, page));
     }
 };

@@ -6,16 +6,18 @@ import ReactPaginate from 'react-paginate';
 import paginatorStyles from './../assets/jss/paginatorStyles';
 
 const Paginator = ({pagination, classes, onPageSelect}) => {
-    let {totalItems, itemsPerPage} = pagination;
+    let {totalItems, itemsPerPage, currentPage} = pagination;
     let mod = Math.ceil(totalItems / itemsPerPage);
-
+    console.log(currentPage);
     const handlePageClick = e => {
         onPageSelect(e);
     }
 
     let jsx = 
         <div className={classNames(classes.paginatorContainer)}>
-            <ReactPaginate previousLabel={"Prev"}
+            <ReactPaginate
+                forcePage={currentPage - 1}
+                previousLabel={"Prev"}
                 nextLabel={"Next"}
                 breakLabel={"..."}
                 breakClassName={"break-me"}
@@ -28,7 +30,6 @@ const Paginator = ({pagination, classes, onPageSelect}) => {
                 activeClassName={"active"} />
         </div>
     ;
-    console.log(totalItems, itemsPerPage);
     if(totalItems < itemsPerPage) jsx = '';
 
     return (

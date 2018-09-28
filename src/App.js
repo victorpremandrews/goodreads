@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
-import { fetchBooks, selectQuery, selectPage } from './actions';
+import { fetchBooks, selectQuery, selectPage, resetPaginate } from './actions';
 import BookSearch from './components/BookSearch';
 import BookList from './components/BookList';
 
@@ -15,12 +15,14 @@ class App extends Component {
 	onBookSearch = query => {
 		let { dispatch } = this.props;
 		dispatch(selectQuery(query));
+		dispatch(resetPaginate());
 		dispatch(fetchBooks(query));
 	};
 
 	onPageSelect = page => {
 		let { dispatch, selectedQuery } = this.props;
-		let selected = page.selected + 1;
+		let selected = Number(page.selected) + 1;
+		console.log('Sel Page', selected);
 		dispatch(selectPage(selected));
 		dispatch(fetchBooks(selectedQuery, selected));
 	}
@@ -48,12 +50,13 @@ const mapStateToProps = state => {
 		didInvalidate: false,
 		books: []
 	};
-
+	
 	const { selectedQuery, booksByQuery, pagination } = state;
 	const booksObj = booksByQuery[selectedQuery] 
 		? booksByQuery[selectedQuery][pagination.currentPage] : booksLoading;
 	const { books, didInvalidate, isFetching } = booksObj || booksLoading;
-
+	
+	console.log('Selected Page', pagination.currentPage);
 	return {
 		isFetching,
 		didInvalidate,

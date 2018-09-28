@@ -6,7 +6,8 @@ const BookSearch = ({onSearch}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        onSearch(inpRef.current.value);
+        let value = inpRef.current.value.trim();
+        if(value)onSearch(inpRef.current.value);
     };
 
     return (
