@@ -8,7 +8,6 @@ import paginatorStyles from './../assets/jss/paginatorStyles';
 const Paginator = ({pagination, classes, onPageSelect}) => {
     let {totalItems, itemsPerPage, currentPage} = pagination;
     let mod = Math.ceil(totalItems / itemsPerPage);
-    console.log(currentPage);
     const handlePageClick = e => {
         onPageSelect(e);
     }

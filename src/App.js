@@ -56,7 +56,6 @@ const mapStateToProps = state => {
 		? booksByQuery[selectedQuery][pagination.currentPage] : booksLoading;
 	const { books, didInvalidate, isFetching } = booksObj || booksLoading;
 	
-	console.log('Selected Page', pagination.currentPage);
 	return {
 		isFetching,
 		didInvalidate,
