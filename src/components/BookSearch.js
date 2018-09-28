@@ -14,7 +14,7 @@ const BookSearch = ({onSearch}) => {
         <form onSubmit={handleSubmit}>
             <div className="searchContainer">
                 <input type="text" ref={inpRef} 
-                    placeholder="Book Search" 
+                    placeholder="Book Search (Press Enter)" 
                     name="bookSearch" />
             </div>
         </form>
